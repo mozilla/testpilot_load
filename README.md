@@ -1,1 +1,1 @@
-Generates Redshift derived streams from Mozilla Push server logs.
+Generates Redshift derived streams from testpilot server logs.
