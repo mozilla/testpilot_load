@@ -15,11 +15,11 @@ local bucket = read_config("bucket") or "heka-logs"
 local region = read_config("region") or "us-east-1"
 local num_days = read_config("num_days") or 1
 
-local function process_day(date)
+local function process_day(app, date)
     local s3_prefix = os.date("shared/%Y-%m", date)
     local fname_date = os.date("%Y%m%d", date)
-    local s3_fname_head = string.format("testpilot-app.log-%s", fname_date)
-    local s3_fname_match_head = string.format("testpilot%%-app%%.log%%-%s", fname_date)
+    local s3_fname_head = string.format("%s-app.log-%s", app, fname_date)
+    local s3_fname_match_head = string.format("%s%%-app%%.log%%-%s", app, fname_date)
     local ls_cmd = string.format("aws s3 ls s3://heka-logs/%s/%s", s3_prefix, s3_fname_head)
     local ls_fd = io.popen(ls_cmd)
     local ls_output = ls_fd:read("*a")
@@ -42,7 +42,8 @@ end
 function process_message()
     for i = num_days, 1, -1 do
         local date = os.time()-(24*60*60*i)
-        process_day(date)
+        process_day("testpilot", date)
+        process_day("universalsearch", date)
     end
     return 0
 end
