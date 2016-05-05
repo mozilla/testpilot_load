@@ -10,7 +10,17 @@ local function get_uuid()
 end
 
 local function get_classifiers()
-    return string.char(string.byte(table.concat(read_message("Fields[classifiers]"), ","), 0, 1000))
+    local message = decode_message(read_message("raw"))
+    local classifiers = ""
+
+    for index, field in ipairs(message.Fields) do
+        if field.name == "classifiers" then
+            classifiers = string.char(string.byte(table.concat(field.value, ","), 0, 1000))
+            break
+        end
+    end
+
+    return classifiers
 end
 
 local name = read_config("table_prefix") or "universalsearch_server"
@@ -30,9 +40,9 @@ local schema = {
     {"status_code",                "INTEGER",   nil,     nil,         "Fields[status_code]"},
     {"t",                          "VARCHAR",   36,      nil,         "Fields[t]"},
     {"classifiers",                "VARCHAR",   1000,    nil,         get_classifiers},
-    {"predicate__is_protocol",      "BOOLEAN",   nil,     nil,         "Fields[predicate.is_protocol]"},
-    {"predicate__query_length",     "BOOLEAN",   nil,     nil,         "Fields[predicate.query_length]"},
-    {"predicate__is_hostname",      "BOOLEAN",   nil,     nil,         "Fields[predicate.is_hostname]"},
+    {'"predicate.is_protocol"',    "BOOLEAN",   nil,     nil,         "Fields[predicate.is_protocol]"},
+    {'"predicate.query_length"',   "BOOLEAN",   nil,     nil,         "Fields[predicate.query_length]"},
+    {'"predicate.is_hostname"',    "BOOLEAN",   nil,     nil,         "Fields[predicate.is_hostname]"},
 }
 
 process_message, timer_event = ds.load_schema(name, schema)
