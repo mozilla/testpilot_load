@@ -18,7 +18,7 @@ local schema = {
     {"logger",                     "VARCHAR",   255,     nil,         "Logger"},
     {"severity",                   "INTEGER",   nil,     nil,         "Severity"},
     {"type",                       "VARCHAR",   255,     nil,         "Type"},
-    {"campaign",                   "VARCHAR",   255,     nil,         "Fields[campaign]"}
+    {"campaign",                   "VARCHAR",   255,     nil,         "Fields[campaign]"},
     {"code",                       "VARCHAR",   255,     nil,         "Fields[code]"},
     {"context",                    "VARCHAR",   255,     nil,         "Fields[context]"},
     {"errno",                      "VARCHAR",   255,     nil,         "Fields[errno]"},
