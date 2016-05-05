@@ -28,22 +28,24 @@ local schema = {
 --   column name                   field type   length  attributes   field name
     {"timestamp",                  "TIMESTAMP", nil,    "SORTKEY",   "Timestamp"},
     {"uuid",                       "VARCHAR",   36,      nil,         get_uuid},
-    {"Hostname",                   "VARCHAR",   255,     nil,         "Hostname"},
+    {"hostname",                   "VARCHAR",   255,     nil,         "Hostname"},
     {"logger",                     "VARCHAR",   255,     nil,         "Logger"},
-    {"Severity",                   "INTEGER",   nil,     nil,         "Severity"},
+    {"severity",                   "INTEGER",   nil,     nil,         "Severity"},
     {"type",                       "VARCHAR",   255,     nil,         "Type"},
-    {"agent",                      "VARCHAR",   255,     nil,         "Fields[agent]"},
+    {"classifiers",                "VARCHAR",   1000,    nil,         get_classifiers},
     {"errno",                      "VARCHAR",   255,     nil,         "Fields[errno]"},
     {"lang",                       "VARCHAR",   255,     nil,         "Fields[lang]"},
     {"method",                     "VARCHAR",   255,     nil,         "Fields[method]"},
     {"path",                       "VARCHAR",   255,     nil,         "Fields[path]"},
-    {"status_code",                "INTEGER",   nil,     nil,         "Fields[status_code]"},
-    {"t",                          "VARCHAR",   36,      nil,         "Fields[t]"},
-    {"classifiers",                "VARCHAR",   1000,    nil,         get_classifiers},
+    {'"predicates.is_hostname"',   "BOOLEAN",   nil,     nil,         "Fields[predicates.is_hostname]"},
     {'"predicates.is_protocol"',   "BOOLEAN",   nil,     nil,         "Fields[predicates.is_protocol]"},
     {'"predicates.query_length"',  "BOOLEAN",   nil,     nil,         "Fields[predicates.query_length]"},
-    {'"predicates.is_hostname"',   "BOOLEAN",   nil,     nil,         "Fields[predicates.is_hostname]"},
     {"query",                      "VARCHAR",   255,     nil,         "Fields[query]"}
+    {"status_code",                "INTEGER",   nil,     nil,         "Fields[status_code]"},
+    {"t",                          "VARCHAR",   36,      nil,         "Fields[t]"},
+    {"user_agent_browser",         "VARCHAR",   255,     nil,         "Fields[user_agent_browser]"},
+    {"user_agent_os",              "VARCHAR",   255,     nil,         "Fields[user_agent_os]"},
+    {"user_agent_version",         "VARCHAR",   255,     nil,         "Fields[user_agent_version]"},
 }
 
 process_message, timer_event = ds.load_schema(name, schema)
