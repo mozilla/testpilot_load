@@ -43,6 +43,7 @@ local schema = {
     {'"predicate.is_protocol"',    "BOOLEAN",   nil,     nil,         "Fields[predicate.is_protocol]"},
     {'"predicate.query_length"',   "BOOLEAN",   nil,     nil,         "Fields[predicate.query_length]"},
     {'"predicate.is_hostname"',    "BOOLEAN",   nil,     nil,         "Fields[predicate.is_hostname]"},
+    {"query",                      "VARCHAR",   255,     nil,         "Fields[query]"}
 }
 
 process_message, timer_event = ds.load_schema(name, schema)
