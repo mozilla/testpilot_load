@@ -23,6 +23,10 @@ local function get_classifiers()
     return classifiers
 end
 
+local function get_false()
+    return false
+end
+
 local name = read_config("table_prefix") or "universalsearch_server"
 local schema = {
 --   column name                   field type   length  attributes   field name
@@ -40,6 +44,7 @@ local schema = {
     {'"predicates.is_hostname"',   "BOOLEAN",   nil,     nil,         "Fields[predicates.is_hostname]"},
     {'"predicates.is_protocol"',   "BOOLEAN",   nil,     nil,         "Fields[predicates.is_protocol]"},
     {'"predicates.query_length"',  "BOOLEAN",   nil,     nil,         "Fields[predicates.query_length]"},
+    {'"predicates.unusual"',       "BOOLEAN",   nil,     nil,         get_false},
     {"query",                      "VARCHAR",   255,     nil,         "Fields[query]"},
     {"status_code",                "INTEGER",   nil,     nil,         "Fields[status_code]"},
     {"t",                          "VARCHAR",   36,      nil,         "Fields[t]"},
